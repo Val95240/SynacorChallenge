@@ -75,7 +75,7 @@ class Program {
             for (let i=0; i<3; ++i) {
                 let out = dis.print_instr(this.memory, instr);
                 console.log(out.repr);
-                instr = out.eip; 
+                instr = out.eip;
             }
 
             process.stdout.write("Registers: ");
@@ -95,12 +95,12 @@ class Program {
             if (cmd.startsWith("info")) {
                 console.log("Breaks: " + this.breakpoints);
                 console.log("Tmp breaks: " + this.tmp_breakpoints + "\n\n");
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("del")) {
                 this.breakpoints = this.breakpoints.filter((item) => { return item != Number(debug_args[0]); });
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("set")) {
@@ -108,7 +108,7 @@ class Program {
                 let value = Number(debug_args[1]);
                 if (0 <= reg && reg <= this.registers.length)
                     this.registers[reg] = value;
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("xo")) {
@@ -127,7 +127,7 @@ class Program {
                     process.stdout.write(String.fromCharCode(this.memory[descr_addr+i+1]));
                 console.log();
 
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("xs")) {
@@ -137,29 +137,29 @@ class Program {
                 for (let i=0; i<length; ++i)
                     process.stdout.write(String.fromCharCode(this.memory[addr+i+1]));
                 console.log('`');
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("tb")) {
                 this.tmp_breakpoints.push(Number(debug_args[0]));
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("b")) {
                 this.breakpoints.push(Number(debug_args[0]));
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("j")) {
                 this.eip = Number(debug_args[0]);
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("w")) {
                 let address = Number(debug_args[0]);
                 let value = Number(debug_args[1]);
                 this.memory[address] = value;
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("l")) {
@@ -167,18 +167,18 @@ class Program {
                 for (let i=0; i<5; ++i) {
                     let out = dis.print_instr(this.memory, address);
                     console.log(out.repr);
-                    address = out.eip; 
+                    address = out.eip;
                 }
                 console.log("\n\n");
-                this.debug_step = true; 
+                this.debug_step = true;
                 return;
 
             } else if (cmd.startsWith("s")) {
-                this.debug_step = true; 
+                this.debug_step = true;
 
             } else if (cmd.startsWith("n")) {
                 this.tmp_breakpoints.push(dis.print_instr(this.memory, this.eip).eip);
-                this.debug_step = false; 
+                this.debug_step = false;
 
             } else {
                 this.debug_step = false;
@@ -304,7 +304,7 @@ class Program {
                     this.registers[a-32768] = this.input.charCodeAt();
                     this.input = this.input.slice(1);
                     this.eip += 2;
-                } else { 
+                } else {
                     this.input = reader.question('-> ') + '\n';
                     if (this.input == "save\n") {
                         this.save();

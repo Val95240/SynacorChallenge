@@ -21,7 +21,7 @@
     {
         &string: name,
         &string: description,
-        flag: obtained,   // 0 if obtained else -1 
+        flag: obtained,   // 0 if obtained else -1
         &function: use    // &function if can be used else 0
     }
 
